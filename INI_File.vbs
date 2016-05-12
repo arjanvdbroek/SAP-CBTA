@@ -1,19 +1,19 @@
-Function GetINIString (IniSection, IniKey, IniFile, DefaultValue, Options)
+Function ReadINIString (IniSection, IniKey, IniFile, DefaultValue, Options)
   On Error Resume Next
   EventComponentBegin()
   If ConditionsManager().CheckConditions() Then
-    ReportDebugLog "CUSTOM Function - INI_READ " & _ 
+    ReportDebugLog "CUSTOM Function - ReadINIString " & _ 
                  vbCrLf & " - IniSection " & IniSection & _
                  vbCrLf & " - IniKey " & IniKey & _
                  vbCrLf & " - IniFile " & IniFile & _
                  vbCrLf & " - DefaultValue " & DefaultValue & _
                  vbCrLf & " - Options " & Options                                                                     
-    GetINIString = GetINIString_Impl (IniSection, IniKey, IniFile, DefaultValue)
+    ReadINIString = ReadINIString_Impl (IniSection, IniKey, IniFile, DefaultValue)
   End If
   EventComponentEnd()
 End Function
 
-Function GetINIString_Impl(Section, KeyName, FileName, DefaultValue)   'internal
+Function ReadINIString_Impl(Section, KeyName, FileName, DefaultValue)   'internal
   Dim INIContents, PosSection, PosEndSection, sContents, Value, Found, bSuccess
   bSuccess = True
   'Get contents of the INI file As a string
@@ -44,10 +44,10 @@ Function GetINIString_Impl(Section, KeyName, FileName, DefaultValue)   'internal
     End If
   End If
   If bSuccess then
-    GetINIString_Impl = Value
-    ReportLog "DONE", "GetINIString", "Setting Read = [" & Section & "] - " & KeyName & " = " & Value
+    ReadINIString_Impl = Value
+    ReportLog "DONE", "ReadINIString", "Setting Read = [" & Section & "] - " & KeyName & " = " & Value
   Else
-    ReportLog "FAILED", "GetINIString", "Setting or file not found"
+    ReportLog "FAILED", "ReadINIString", "Setting or file not found"
   End If
 End Function
 
